@@ -5,20 +5,20 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class Util {
+    private static String url = "jdbc:mysql://localhost:3306/users";
+    private static String username = "root";
+    private static String password = "root";
 
     public static Connection getConnection() {
-        String url = "jdbc:mysql://localhost:3306";
-        String username = "root";
-        String password = "root";
-        // реализуйте настройку соеденения с БД
-        Connection connection;
+
+        Connection connection = null;
         try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
             connection = DriverManager.getConnection(url, username, password);
 
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
+        } catch (SQLException | ClassNotFoundException e) {
+            System.out.println(e.getMessage());
         }
-
         return connection;
     }
 }
